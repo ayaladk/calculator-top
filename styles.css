@@ -17,8 +17,8 @@ body {
 .calculator-base {
 	display: flex;
 	flex-direction: column;
-	height: 80%;
-	width: 25%;
+	height: 500px;
+	width: 350px;
 	padding: 20px 10px;
 	gap: 20px;
 	background-color: dimgray;
@@ -26,7 +26,7 @@ body {
 
 .screen-section {
 	display: flex;
-	flex-grow: 1;
+	height: 80px;
 	align-items: center;
 	padding: 5px;
 }
@@ -34,12 +34,14 @@ body {
 .screen {
 	display: flex;
 	width: 100%;
+	height: 100%;
 	justify-content: end;
 	align-items: center;
-	flex-grow: 1;
 	font-size: 50px;
 	background-color: darkseagreen;
 	padding: 0px 5px;
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
 .calculator-keys-section {

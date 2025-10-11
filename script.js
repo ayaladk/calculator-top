@@ -1,25 +1,37 @@
-const add = (a, b) => a + b;
-const substract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const screen = document.querySelector(".screen");
+const buttons = document.querySelectorAll(".number");
+const resetButton = document.querySelector("#clear");
+const equal = document.querySelector("#equal");
 
-function operate(number1, number2, operator) {
-	if (operator == '+') {
-		return add(number1, number2);
-	}
-	else if (operator == '-') {
-		return substract(number1, number2);
-	}
-	else if (operator == '*') {
-		return multiply(number1, number2);
-	}
-	else if (operator == '/') {
-		return divide(number1, number2);
-	}
+let currentInput = "";
+
+function clearButton() {
+	currentInput = "";
+	screen.textContent = currentInput;
 }
 
-let number1 = 1
-let number2 = 2
-let operator = '-'
+buttons.forEach(btn => {
+	btn.addEventListener("click", () => {
+		currentInput += btn.textContent;
+		screen.textContent = currentInput;
+	});
+});
 
-console.log(operate(number1, number2, operator))
+resetButton.addEventListener("click", () => clearButton());
+
+equal.addEventListener("click", () => {
+	try {
+		screen.textContent = new Function(`return Math.round(${screen.textContent})`)();
+		currentInput = screen.textContent;
+		if (screen.textContent === "Infinity") {
+			currentInput = "";
+			screen.textContent = "Error";
+		} else if (screen.textContent === "NaN") {
+			currentInput = "";
+			screen.textContent = "Error";
+		}
+	} catch {
+		screen.textContent = "Error";
+		currentInput = "";
+	}
+});
